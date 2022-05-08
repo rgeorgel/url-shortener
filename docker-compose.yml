@@ -1,0 +1,39 @@
+version: '3.7'
+
+networks:
+  default:
+    name: my-network
+
+
+services:
+  url_shortener:
+    build: docker/node-16
+    container_name: app.us.url_shortener
+    depends_on:
+      - mongo-url_shortener
+    ports:
+      - '3030:3000'
+    volumes:
+      - ./:/app
+      - ./:/var/app/node_modules
+    working_dir: /app
+    command: yarn docker:start
+    environment:
+      HEALTH_CHECK_PORT: 3000
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+  mongo-url_shortener:
+    image: mongo:bionic
+    container_name: mongo-form
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin-123
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongoDB:/data/db
+      - ./docker/docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
