@@ -1,0 +1,13 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "swagger": "2.0",
+    "version": "1.0.0",
+    "title": "Url Shortener",
+    "description": "Url Shortener",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  }
+}

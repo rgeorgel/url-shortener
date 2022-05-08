@@ -1,0 +1,1 @@
+export { Health } from '@app/application/models/health.model';
