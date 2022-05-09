@@ -16,7 +16,7 @@ module.exports = {
   ],
   collectCoverageFrom: [
     '<rootDir>/src/application/**/*.+(ts|tsx|js)',
-    '<rootDir>/src/adapter/**/*.+(ts|tsx|js)',
+    '<rootDir>/src/adapters/**/*.+(ts|tsx|js)',
     '<rootDir>/src/infrastructure/database/**/*.+(ts|tsx|js)',
     '!<rootDir>/src/infrastructure/database/index.ts',
   ],

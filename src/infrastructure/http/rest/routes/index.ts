@@ -4,6 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import healthRoute from '@app/infrastructure/http/rest/routes/health.route';
 import * as swaggerOptions from '@app/infrastructure/http/rest/routes/swagger.json';
 import config from '@app/config';
+import shortUrlRoute from './shortUrl.route';
 
 export class ApplicationRouter {
   router: Router;
@@ -28,6 +29,7 @@ export class ApplicationRouter {
     }
 
     this.router.use('/health', healthRoute);
+    this.router.use('/', shortUrlRoute);
   }
 }
 

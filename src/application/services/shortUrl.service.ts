@@ -28,6 +28,16 @@ export class ShortUrlService {
   public async update(shortUrl: ShortUrl): Promise<ShortUrl> {
     shortUrl.isValid();
 
+    const existentShortUrl = await this.get(shortUrl.shortUrlId!);
+
+    if (!existentShortUrl) {
+      return this.create(shortUrl.originalUrl);
+    }
+
+    if (existentShortUrl.code !== shortUrl.code) {
+      throw new Error('Invalid code.');
+    }
+
     shortUrl.url = config.server.domainUrl;
 
     return this.repository.update(shortUrl);

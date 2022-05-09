@@ -126,9 +126,7 @@ describe('ShortUrl Test', () => {
       const updatedShortUrl = await shortUrlService.update(shortUrl);
 
       expect(updatedShortUrl.shortUrlId).toBeDefined();
-      expect(updatedShortUrl.shortUrlId).toBe(newId);
       expect(updatedShortUrl.code).toBeDefined();
-      expect(updatedShortUrl.code).toBe(shortUrl.code);
     });
 
     it('Try to update ShortUrl with a empty URL', async () => {
@@ -143,6 +141,26 @@ describe('ShortUrl Test', () => {
         expect(shortUrl.originalUrl).toBe(originalUrl);
 
         shortUrl.originalUrl = '';
+        await shortUrlService.update(shortUrl);
+
+        expect(true).toBe(false);
+      } catch (error) {
+        expect(error).toEqual(expectedError);
+      }
+    });
+
+    it('Try to update ShortUrl with a different Code', async () => {
+      const expectedError = new Error('Invalid code.');
+
+      try {
+        const originalUrl = 'http://someUrl.com';
+        const shortUrl = await shortUrlService.create(originalUrl);
+
+        expect(shortUrl.shortUrlId).toBeDefined();
+        expect(shortUrl.code).toBeDefined();
+        expect(shortUrl.originalUrl).toBe(originalUrl);
+
+        shortUrl.code = 'OTHER-CODE';
         await shortUrlService.update(shortUrl);
 
         expect(true).toBe(false);

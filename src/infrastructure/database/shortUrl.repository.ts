@@ -93,15 +93,10 @@ export class ShortUrlRepository implements ShortUrlRepositoryInterface {
   async findAll(): Promise<Array<ShortUrl>> {
     const documents = await database.find();
 
-    if (documents) {
-      return documents.map((document) =>
-        shortUrlDatabaseAdapter.repositoryToModel(document),
-      );
-    }
-
-    return new Array<ShortUrl>();
+    return documents.map((document) =>
+      shortUrlDatabaseAdapter.repositoryToModel(document),
+    );
   }
-
 }
 
 const shortUrlRepository = new ShortUrlRepository();
