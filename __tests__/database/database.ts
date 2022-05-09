@@ -19,7 +19,7 @@ export async function connectDB () {
 
 export async function clearDB() {
   for (const i in mongoose.connection.collections) {
-    mongoose.connection.collections[i].deleteOne(function() {});
+    mongoose.connection.collections[i].deleteOne({});
   }
 
   await connectDB();

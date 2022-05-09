@@ -1,0 +1,1 @@
+export { ShortUrlInterface } from '@app/application/interfaces/shortUrl.interface';
