@@ -6,6 +6,10 @@ In this service, the user is able to generate a short URL based on a long URL e.
 
 when the user access the short URL needs to be redirected to the original link
 
+#### Aplication example
+GraphQL: [https://rgeorgel-url-shortener.herokuapp.com/api/graphql](https://rgeorgel-url-shortener.herokuapp.com/api/graphql "https://rgeorgel-url-shortener.herokuapp.com/api/graphql") <br/>
+Swagger: [https://rgeorgel-url-shortener.herokuapp.com/swagger/](https://rgeorgel-url-shortener.herokuapp.com/swagger/ "https://rgeorgel-url-shortener.herokuapp.com/swagger/")
+
 ## Setup
 ### Local setup
 pre-requirement: had yarn installed in the machine. recomend to install the [YVM](https://yvm.js.org/docs/overview "YVM")
