@@ -37,6 +37,7 @@ class App {
 
   private routes(): App {
     this._express.use('/', ApplicationRouter);
+    this._express.use(express.static('public'));
 
     return this;
   }

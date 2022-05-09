@@ -1,6 +1,7 @@
 import { ShortUrlAdapter } from '@app/adapters/http/rest/shortUrl.adapter';
 import shortUrlService from '@app/application/services/shortUrl.service';
 import { Request, Response } from 'express';
+import path from 'path';
 import { ErrorResponse } from '../models/errorResponse';
 import { SuccessResponse } from '../models/successResponse';
 
@@ -10,6 +11,12 @@ export class ShortUrlController {
     const shortUrl = await shortUrlService.getByCode(code);
 
     if (!shortUrl) {
+      // respond with html page
+      if (req.accepts('html')) {
+        res.sendFile(path.resolve('public/404.html'));
+        return res;
+      }
+
       return res.status(404).json(new ErrorResponse(
         'ERROR_SHORT_URL_NOT_FOUND',
         'Not Found',
