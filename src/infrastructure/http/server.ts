@@ -5,6 +5,7 @@ import { createServer, Server } from 'http';
 import logger from 'morgan';
 import config from '@app/config';
 import ApplicationRouter from '@app/infrastructure/http/rest/routes';
+import graphQL from '@app/infrastructure/http/graphql';
 
 
 class App {
@@ -22,7 +23,7 @@ class App {
   constructor() {
     this._express = express();
     this._httpServer = createServer(this._express);
-    this.middleware().routes();
+    this.middleware().graphQL().routes();
   }
 
   private middleware(): App {
@@ -40,6 +41,11 @@ class App {
     return this;
   }
 
+  private graphQL() {
+    graphQL.init(this._express);
+
+    return this;
+  }
 }
 
 const app = new App();

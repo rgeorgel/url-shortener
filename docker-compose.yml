@@ -11,6 +11,7 @@ services:
     container_name: app.us.url_shortener
     depends_on:
       - mongo-url_shortener
+      - redis
     ports:
       - '3030:3000'
     volumes:
@@ -37,3 +38,9 @@ services:
     volumes:
       - ./mongoDB:/data/db
       - ./docker/docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+
+  redis:
+    image: 'redis:alpine'
+    container_name: redis-api
+    hostname: redis
+    command: redis-server
