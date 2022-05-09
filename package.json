@@ -5,10 +5,13 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc --project .",
-    "docker:start": "yarn && yarn start",
-    "start": "tsc-watch --onSuccess \"concurrently npm:start:dev\"",
+    "docker:start": "yarn && yarn serve",
+    "serve": "tsc-watch --onSuccess \"concurrently npm:start:dev\"",
+    "start": "node dist/src/index.js",
     "start:dev": "env TZ='UTC' node dist/src/index | pino-pretty",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test-ci": "jest --coverage --forceExit",
+    "postinstall": "tsc --project ."
   },
   "author": "Ricardo Georgel",
   "license": "ISC",
