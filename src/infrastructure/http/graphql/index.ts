@@ -4,6 +4,7 @@ import { buildSchema } from 'type-graphql';
 import redis from '@app/infrastructure/cache/pubSub';
 import config from '@app/config';
 import shortUrlResolver from '@app/infrastructure/http/graphql/resolvers/shortUrl.resolver';
+import shortUrlClickResolver from '@app/infrastructure/http/graphql/resolvers/shortUrlClick.resolver';
 
 export class ApplicationGraphQL {
   async init(app: express.Application) {
@@ -11,6 +12,7 @@ export class ApplicationGraphQL {
     const schema = await buildSchema({
       resolvers: [
         shortUrlResolver,
+        shortUrlClickResolver,
       ],
       validate: false,
       emitSchemaFile: true,
