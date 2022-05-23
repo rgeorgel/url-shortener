@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import shortUrlClickRepository from "@app/infrastructure/database/shortUrlClick.repository";
 import { ShortUrlClickRepositoryInterface } from "@app/application/interfaces/database/shortUrlClickRepository.interface";
 import { ShortUrlClick } from "../models";
@@ -10,6 +11,10 @@ export class ShortUrlClickService {
   }
 
   public async create(shortUrlClick: ShortUrlClick): Promise<void> {
+    if (!shortUrlClick.shortUrlClickId) {
+      shortUrlClick.shortUrlClickId = uuid();
+    }
+
     shortUrlClick.isValid();
 
     await this.repository.create(shortUrlClick);

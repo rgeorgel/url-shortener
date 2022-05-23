@@ -1,5 +1,7 @@
 import { ShortUrlAdapter } from '@app/adapters/http/rest/shortUrl.adapter';
+import { ShortUrlClick } from '@app/application/models';
 import shortUrlService from '@app/application/services/shortUrl.service';
+import shortUrlClickService from '@app/application/services/shortUrlClick.service';
 import { Request, Response } from 'express';
 import path from 'path';
 import { ErrorResponse } from '../models/errorResponse';
@@ -22,6 +24,12 @@ export class ShortUrlController {
         'Not Found',
       ));
     }
+
+    shortUrlClickService.create(new ShortUrlClick({
+      code,
+      originalUrl: shortUrl.originalUrl,
+      shortUrlId: shortUrl.shortUrlId!
+    }));
 
     return res.redirect(shortUrl.originalUrl);
   }
